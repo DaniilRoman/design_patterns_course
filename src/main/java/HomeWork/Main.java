@@ -1,7 +1,9 @@
-import ClassRooms.ClassRoom;
-import Visitors.BadStudent;
-import Visitors.Lector;
-import Visitors.Student;
+package HomeWork;
+
+import HomeWork.ClassRooms.ClassRoom;
+import HomeWork.Visitors.BadStudent;
+import HomeWork.Visitors.Lector;
+import HomeWork.Visitors.Student;
 
 import java.util.Arrays;
 

@@ -1,6 +1,6 @@
-package ClassRooms;
+package HomeWork.ClassRooms;
 
-import Visitors.IVisitor;
+import HomeWork.Visitors.IVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
