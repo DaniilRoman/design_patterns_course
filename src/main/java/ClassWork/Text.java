@@ -10,10 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Text {
-    List<IPrintable> words;
+    private List<IPrintable> words;
 
-    void print(IPrinter printer) {
-        words.forEach(iPrintable -> iPrintable.print(printer));
+    public void print(IPrinter printer) {
+        words.forEach(printable -> { printable.print(printer); });
     }
-
 }
