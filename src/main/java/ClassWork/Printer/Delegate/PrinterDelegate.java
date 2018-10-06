@@ -1,5 +1,6 @@
 package ClassWork.Printer.Delegate;
 
+import ClassWork.Printable.IPrintable;
 import ClassWork.Printer.PrinterSpecial;
 import ClassWork.Text;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class PrinterDelegate extends PrinterSpecial implements IPrinterDelegate {
 
     @Override
-    public void print(Text text) {
+    public void print(IPrintable text) {
         text.print(this);
     }
 

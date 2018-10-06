@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Text {
+public class Text implements IPrintable {
     private List<IPrintable> words;
 
     public void print(IPrinter printer) {
