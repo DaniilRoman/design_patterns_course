@@ -1,6 +1,7 @@
 package BridgePattern;
 
 import BridgePattern.Drawer.DrawerImpl.DrawerConsole;
+import BridgePattern.Drawer.DrawerImpl.DrawerGraphic;
 import BridgePattern.Matrix.Matrix;
 import BridgePattern.Matrix.MatrixImpl.MatrixN;
 import BridgePattern.Matrix.MatrixImpl.MatrixS;
@@ -27,7 +28,9 @@ public class Main {
 //        }
 
         normalM.setDrawer(new DrawerConsole());
-
+        normalM.draw();
+        Thread.sleep(1000);
+        normalM.setDrawer(new DrawerGraphic());
         normalM.draw();
     }
 

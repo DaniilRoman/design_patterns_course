@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract public class Matrix implements IMatrix {
+abstract public class Matrix implements IMatrix, IDrawble {
 
     private IDrawer drawer;
 
@@ -16,12 +16,6 @@ abstract public class Matrix implements IMatrix {
 
     public void setDrawer(IDrawer drawer) {
         this.drawer = drawer;
-    }
-
-    public void draw() throws InterruptedException, IOException {
-        drawer.drawBorder(getRows(), getCols());
-        Thread.sleep(1000);
-        drawer.drawItem(this);
     }
 
     @Override
@@ -49,6 +43,14 @@ abstract public class Matrix implements IMatrix {
     protected void createVector(IVector vector) {
         if(matrix==null) { matrix = new ArrayList<>(0); }
         matrix.add(vector);
+    }
+
+    protected void drawBorder(int height, int width) {
+        drawer.drawBorder(height, width);
+    }
+
+    protected void drawItem(int yCord, int xCord, Integer value) throws IOException {
+        drawer.drawItem(yCord, xCord, value);
     }
 
 }
