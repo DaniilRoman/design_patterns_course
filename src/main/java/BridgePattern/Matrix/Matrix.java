@@ -14,6 +14,12 @@ abstract public class Matrix implements IMatrix, IDrawble {
 
     private List<IVector> matrix;
 
+    public Matrix(int row, int col, IVector vector) {
+        for (int i = 0; i<row; i++) {
+            createVector(vector, col);
+        }
+    }
+
     public void setDrawer(IDrawer drawer) {
         this.drawer = drawer;
     }
@@ -40,9 +46,9 @@ abstract public class Matrix implements IMatrix, IDrawble {
         return Collections.max(sizesOfRows);
     }
 
-    protected void createVector(IVector vector) {
+    protected void createVector(IVector vector, Integer col) {
         if(matrix==null) { matrix = new ArrayList<>(0); }
-        matrix.add(vector);
+        matrix.add(vector.createVector(col));
     }
 
     protected void drawBorder(int height, int width) {

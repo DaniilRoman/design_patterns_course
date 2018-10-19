@@ -1,10 +1,12 @@
 package BridgePattern.Vector.VectorImpl;
 
 import BridgePattern.Vector.IVector;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@NoArgsConstructor
 public class VectorS implements IVector{
 
     private Map<Integer, Integer> values;
@@ -28,5 +30,10 @@ public class VectorS implements IVector{
     @Override
     public void set(int pos, int value) {
         values.put(pos, value);
+    }
+
+    @Override
+    public IVector createVector(int col) {
+        return new VectorS(col);
     }
 }

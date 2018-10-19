@@ -1,7 +1,5 @@
 package BridgePattern;
 
-import BridgePattern.Drawer.DrawerImpl.DrawerConsole;
-import BridgePattern.Drawer.DrawerImpl.DrawerGraphic;
 import BridgePattern.Drawer.IDrawer;
 import BridgePattern.Matrix.Matrix;
 import BridgePattern.Matrix.MatrixImpl.MatrixN;
@@ -41,7 +39,7 @@ public class Client extends JFrame {
         sparseButton.addActionListener(new SparseButtonEventListener());
         normalButton.addActionListener(new NormalButtonEventListener());
         addInContainer(container, Arrays.asList(heightLabel, heightInput,
-                widthLabal, widthInput, normalButton, sparseButton, check));
+                widthLabal, widthInput, normalButton, sparseButton));
 
         setVisible(true);
     }

@@ -1,8 +1,9 @@
 package BridgePattern.Vector.VectorImpl;
 
 import BridgePattern.Vector.IVector;
+import lombok.NoArgsConstructor;
 
-
+@NoArgsConstructor
 public class VectorN implements IVector {
 
     private Integer[] values;
@@ -26,5 +27,10 @@ public class VectorN implements IVector {
     @Override
     public void set(int pos, int value) {
         values[pos] = value;
+    }
+
+    @Override
+    public IVector createVector(int col) {
+        return new VectorN(col);
     }
 }
