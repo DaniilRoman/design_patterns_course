@@ -10,18 +10,8 @@ import java.io.IOException;
 public class MatrixN extends Matrix {
 
     public MatrixN(int row, int col) {
-        super(row, col, new VectorN());
+        super(row, col);
     }
-
-    public MatrixN(int row, int col, IVector vector) {
-        super(row, col, vector);
-    }
-
-//    public MatrixN(int row, int col, ) {
-//        for (int i = 0; i<row; i++) {
-//            createVector(new VectorN(col));
-//        }
-//    }
 
     @Override
     public void draw() throws InterruptedException, IOException {
@@ -32,5 +22,10 @@ public class MatrixN extends Matrix {
                 drawItem(i, j, get(i, j));
             }
         }
+    }
+
+    @Override
+    protected IVector createVector(int col) {
+        return new VectorN(col);
     }
 }

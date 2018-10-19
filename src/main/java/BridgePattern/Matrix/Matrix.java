@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 abstract public class Matrix implements IMatrix, IDrawble {
 
@@ -14,9 +15,14 @@ abstract public class Matrix implements IMatrix, IDrawble {
 
     private List<IVector> matrix;
 
-    public Matrix(int row, int col, IVector vector) {
+    public Matrix(int row, int col) {
         for (int i = 0; i<row; i++) {
-            createVector(vector, col);
+            if(matrix == null){
+                matrix = new ArrayList<>(0);
+            }
+            else{
+                matrix.add(createVector(col));
+            }
         }
     }
 
@@ -46,11 +52,6 @@ abstract public class Matrix implements IMatrix, IDrawble {
         return Collections.max(sizesOfRows);
     }
 
-    protected void createVector(IVector vector, Integer col) {
-        if(matrix==null) { matrix = new ArrayList<>(0); }
-        matrix.add(vector.createVector(col));
-    }
-
     protected void drawBorder(int height, int width) {
         drawer.drawBorder(height, width);
     }
@@ -59,4 +60,5 @@ abstract public class Matrix implements IMatrix, IDrawble {
         drawer.drawItem(yCord, xCord, value);
     }
 
+    protected abstract IVector createVector(int col);
 }
