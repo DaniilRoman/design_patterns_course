@@ -43,7 +43,7 @@ public class DrawerGraphic extends JFrame implements IDrawer {
     }
 
     @Override
-    public void drawItem(int yCord, int xCord, Integer value) throws IOException {
+    public void drawItem(int yCord, int xCord, Integer value) {
         buttons[yCord][xCord].setText(Optional.ofNullable(value).orElse(0).toString());
 //        panel.updateUI();
 //        setVisible(true);

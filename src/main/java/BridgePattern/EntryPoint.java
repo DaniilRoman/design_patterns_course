@@ -10,8 +10,8 @@ public class EntryPoint {
     public static void main(String[] args) {
         DrawerGraphic drawerGraphic = new DrawerGraphic();
         DrawerConsole drawerConsole = new DrawerConsole();
-        DrawerHtml drawerHtml = new DrawerHtml();
+//        DrawerHtml drawerHtml = new DrawerHtml();
 
-        Client app = new Client(Arrays.asList(drawerHtml, drawerGraphic));
+        Client app = new Client(Arrays.asList(drawerConsole, drawerGraphic));
     }
 }

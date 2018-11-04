@@ -1,7 +1,11 @@
 package BridgePattern.Matrix;
 
-import java.io.IOException;
+import BridgePattern.Drawer.IDrawer;
+
 
 public interface IDrawble {
-    void draw() throws InterruptedException, IOException;
+    void draw();
+    void drawItem(int yCord, int xCord, Integer value);
+    void setDrawer(IDrawer drawer);
+    void drawBorder(int height, int width);
 }

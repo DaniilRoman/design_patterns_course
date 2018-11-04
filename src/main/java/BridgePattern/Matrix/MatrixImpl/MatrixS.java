@@ -4,7 +4,6 @@ import BridgePattern.Matrix.Matrix;
 import BridgePattern.Vector.IVector;
 import BridgePattern.Vector.VectorImpl.VectorS;
 
-import java.io.IOException;
 
 public class MatrixS extends Matrix {
 
@@ -13,15 +12,19 @@ public class MatrixS extends Matrix {
     }
 
     @Override
-    public void draw() throws InterruptedException, IOException {
+    public void draw() {
         drawBorder(getRows(), getCols());
-        Thread.sleep(1000);
         for (int i = 0; i< getRows(); i++) {
             for (int j = 0; j < getCols(); j++) {
-                if(get(i, j) != null) {
-                    drawItem(i, j, get(i, j));
-                }
+                drawItem(i, j, get(i, j));
             }
+        }
+    }
+
+    @Override
+    public void drawItem(int yCord, int xCord, Integer value) {
+        if(get(yCord, xCord) != null) {
+            drawer.drawItem(yCord, xCord, value);
         }
     }
 

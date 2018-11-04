@@ -3,9 +3,6 @@ package BridgePattern.Matrix.MatrixImpl;
 import BridgePattern.Matrix.Matrix;
 import BridgePattern.Vector.IVector;
 import BridgePattern.Vector.VectorImpl.VectorN;
-import lombok.AllArgsConstructor;
-
-import java.io.IOException;
 
 public class MatrixN extends Matrix {
 
@@ -14,15 +11,20 @@ public class MatrixN extends Matrix {
     }
 
     @Override
-    public void draw() throws InterruptedException, IOException {
+    public void draw() {
         drawBorder(getRows(), getCols());
-        Thread.sleep(1000);
         for (int i = 0; i< getRows(); i++) {
             for (int j = 0; j < getCols(); j++) {
                 drawItem(i, j, get(i, j));
             }
         }
     }
+
+    @Override
+    public void drawItem(int yCord, int xCord, Integer value) {
+        drawer.drawItem(yCord, xCord, value);
+    }
+
 
     @Override
     protected IVector createVector(int col) {

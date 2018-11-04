@@ -1,6 +1,6 @@
 package BridgePattern.Matrix;
 
-public interface IMatrix {
+public interface IMatrix extends IDrawble{
 
     Integer get(int row, int col);
 
@@ -9,5 +9,7 @@ public interface IMatrix {
     int getRows();
 
     int getCols();
+
+    IMatrix getComponent();
 
 }

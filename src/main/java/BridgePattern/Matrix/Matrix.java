@@ -3,15 +3,13 @@ package BridgePattern.Matrix;
 import BridgePattern.Drawer.IDrawer;
 import BridgePattern.Vector.IVector;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
-abstract public class Matrix implements IMatrix, IDrawble {
+abstract public class Matrix implements IMatrix {
 
-    private IDrawer drawer;
+    protected IDrawer drawer;
 
     private List<IVector> matrix;
 
@@ -20,12 +18,11 @@ abstract public class Matrix implements IMatrix, IDrawble {
             if(matrix == null){
                 matrix = new ArrayList<>(0);
             }
-            else{
-                matrix.add(createVector(col));
-            }
+            matrix.add(createVector(col));
         }
     }
 
+    @Override
     public void setDrawer(IDrawer drawer) {
         this.drawer = drawer;
     }
@@ -52,12 +49,14 @@ abstract public class Matrix implements IMatrix, IDrawble {
         return Collections.max(sizesOfRows);
     }
 
-    protected void drawBorder(int height, int width) {
-        drawer.drawBorder(height, width);
+    @Override
+    public IMatrix getComponent() {
+        return this;
     }
 
-    protected void drawItem(int yCord, int xCord, Integer value) throws IOException {
-        drawer.drawItem(yCord, xCord, value);
+    @Override
+    public void drawBorder(int height, int width) {
+        drawer.drawBorder(height, width);
     }
 
     protected abstract IVector createVector(int col);

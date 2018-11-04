@@ -25,7 +25,7 @@ public class VectorN implements IVector {
     }
 
     @Override
-    public void set(int pos, int value) {
+    public void set(int pos, Integer value) {
         values[pos] = value;
     }
 

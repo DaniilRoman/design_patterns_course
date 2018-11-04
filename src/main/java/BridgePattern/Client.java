@@ -1,17 +1,19 @@
 package BridgePattern;
 
 import BridgePattern.Drawer.IDrawer;
-import BridgePattern.Matrix.Matrix;
+import BridgePattern.Matrix.Decorator.Renumber;
+import BridgePattern.Matrix.IMatrix;
 import BridgePattern.Matrix.MatrixImpl.MatrixN;
 import BridgePattern.Matrix.MatrixImpl.MatrixS;
-import BridgePattern.Util.ValuesGen;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
+
+import static BridgePattern.Util.ValuesGen.genRandom;
+import static BridgePattern.Util.ValuesGen.generate;
 
 public class Client extends JFrame {
     private JButton normalButton = new JButton("normal");
@@ -21,7 +23,10 @@ public class Client extends JFrame {
     private JLabel heightLabel = new JLabel("height:");
     private JLabel widthLabal = new JLabel("width: ");
     private JCheckBox check = new JCheckBox("Available border", false);
+    private JButton renumberButton = new JButton("renumber");
+    private JButton revertButton = new JButton("revert");
     private List<IDrawer> drawers;
+    private IMatrix matrix;
 
     public Client(List<IDrawer> drawers) {
         super("Simple Example");
@@ -38,35 +43,55 @@ public class Client extends JFrame {
         widthInput.setSize(20, 20);
         sparseButton.addActionListener(new SparseButtonEventListener());
         normalButton.addActionListener(new NormalButtonEventListener());
-        addInContainer(container, Arrays.asList(heightLabel, heightInput,
-                widthLabal, widthInput, normalButton, sparseButton));
+        renumberButton.addActionListener(new RenumberButtonEventListener());
+        revertButton.addActionListener(new RevertButtonEventListener());
+        addInContainer(container, Arrays.asList(heightLabel, heightInput, widthLabal,
+                widthInput, normalButton, sparseButton, renumberButton, revertButton));
 
         setVisible(true);
     }
 
     class NormalButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            MatrixN matrixN = new MatrixN(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText()));
-            drawAndGenerate(matrixN);
+            matrix = new MatrixN(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText()));
+            generateAndDraw(matrix);
         }
     }
 
     class SparseButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            MatrixS matrixS = new MatrixS(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText()));
-            drawAndGenerate(matrixS);
+            matrix = new MatrixS(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText()));
+            generateAndDraw(matrix);
         }
     }
 
-    private void drawAndGenerate(Matrix matrix){
-        ValuesGen.generate(matrix, 10, 80);
+    class RenumberButtonEventListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Renumber matrixDecorator = new Renumber(matrix);
+            matrixDecorator.renumberCols(genRandom(matrixDecorator.getCols()),
+                                         genRandom(matrixDecorator.getCols()));
+            matrixDecorator.renumberRows(genRandom(matrixDecorator.getRows()),
+                                         genRandom(matrixDecorator.getRows()));
+            matrix = matrixDecorator;
+            draw(matrix);
+        }
+    }
+
+    class RevertButtonEventListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            draw(matrix.getComponent());
+        }
+    }
+
+    private void generateAndDraw(IMatrix matrix){
+        generate(matrix, 10, 80);
+        draw(matrix);
+    }
+
+    private void draw(IMatrix matrix) {
         drawers.forEach(drawer -> {
             matrix.setDrawer(drawer);
-            try {
-                matrix.draw();
-            } catch (InterruptedException | IOException e1) {
-                e1.printStackTrace();
-            }
+            matrix.draw();
         });
     }
 

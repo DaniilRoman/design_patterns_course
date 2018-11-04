@@ -1,17 +1,22 @@
 package BridgePattern.Util;
 
-import BridgePattern.Matrix.Matrix;
+import BridgePattern.Matrix.IMatrix;
 
 import java.util.Random;
 
 public class ValuesGen {
 
-    public static void generate(Matrix matrix, int count, int maxValue) {
+    private static Random r = new Random();
+
+    public static void generate(IMatrix matrix, int count, int maxValue) {
         int rowsCount = matrix.getRows(),
             colsCount = matrix.getCols();
-        Random r = new Random();
         int row, col;
         Integer elmt;
+
+        if(count > rowsCount*colsCount) {
+            count = rowsCount*colsCount;
+        }
 
         for (int i = 0; i<count; i++) {
             while (true) {
@@ -24,6 +29,10 @@ public class ValuesGen {
                 }
             }
         }
+    }
+
+    public static int genRandom(int limit) {
+        return r.nextInt(limit);
     }
 
 }
