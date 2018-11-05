@@ -31,9 +31,4 @@ public class VectorS implements IVector{
     public void set(int pos, Integer value) {
         values.put(pos, value);
     }
-
-    @Override
-    public IVector createVector(int col) {
-        return new VectorS(col);
-    }
 }

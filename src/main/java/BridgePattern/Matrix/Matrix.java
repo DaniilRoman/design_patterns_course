@@ -14,10 +14,8 @@ abstract public class Matrix implements IMatrix {
     private List<IVector> matrix;
 
     public Matrix(int row, int col) {
+        matrix = new ArrayList<>(0);
         for (int i = 0; i<row; i++) {
-            if(matrix == null){
-                matrix = new ArrayList<>(0);
-            }
             matrix.add(createVector(col));
         }
     }
@@ -47,11 +45,6 @@ abstract public class Matrix implements IMatrix {
         List<Integer> sizesOfRows = new ArrayList<>(0);
         matrix.forEach(vector -> sizesOfRows.add(vector.getSize()));
         return Collections.max(sizesOfRows);
-    }
-
-    @Override
-    public IMatrix getComponent() {
-        return this;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class DrawerConsole implements IDrawer {
             System.out.println(" ]");
         }
 
-        System.out.println();//удалить
+        System.out.println();
     }
 
 }

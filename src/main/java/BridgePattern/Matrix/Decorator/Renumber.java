@@ -49,13 +49,4 @@ public class Renumber extends MatrixDecorator {
         matrix.set(row, col, value);
     }
 
-    @Override
-    public void draw() {
-        drawBorder(getRows(), getCols());
-        for (int i = 0; i< getRows(); i++) {
-            for (int j = 0; j < getCols(); j++) {
-                drawItem(i, j, get(i, j));
-            }
-        }
-    }
 }

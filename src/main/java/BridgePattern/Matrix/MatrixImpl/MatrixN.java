@@ -11,20 +11,9 @@ public class MatrixN extends Matrix {
     }
 
     @Override
-    public void draw() {
-        drawBorder(getRows(), getCols());
-        for (int i = 0; i< getRows(); i++) {
-            for (int j = 0; j < getCols(); j++) {
-                drawItem(i, j, get(i, j));
-            }
-        }
-    }
-
-    @Override
     public void drawItem(int yCord, int xCord, Integer value) {
         drawer.drawItem(yCord, xCord, value);
     }
-
 
     @Override
     protected IVector createVector(int col) {

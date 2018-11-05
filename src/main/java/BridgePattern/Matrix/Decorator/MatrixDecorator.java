@@ -42,10 +42,5 @@ public abstract class MatrixDecorator implements IMatrix, IDrawble{
     public void drawBorder(int height, int width) {
         matrix.drawBorder(height, width);
     }
-//
-//    @Override
-//    public void draw() {
-//        matrix.draw();
-//    }
 
 }

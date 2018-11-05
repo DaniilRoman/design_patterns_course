@@ -28,9 +28,4 @@ public class VectorN implements IVector {
     public void set(int pos, Integer value) {
         values[pos] = value;
     }
-
-    @Override
-    public IVector createVector(int col) {
-        return new VectorN(col);
-    }
 }

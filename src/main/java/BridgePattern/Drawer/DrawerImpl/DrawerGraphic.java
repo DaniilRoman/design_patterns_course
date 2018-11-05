@@ -27,7 +27,7 @@ public class DrawerGraphic extends JFrame implements IDrawer {
     public void drawBorder(int height, int width) {
         this.height = height;
         this.width = width;
-        this.matrix = new Integer[height][width]; // вынести!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        this.matrix = new Integer[height][width];
         buttons = new JButton[height][width];
         if(panel != null) { remove(panel); };
         panel = new JPanel();
