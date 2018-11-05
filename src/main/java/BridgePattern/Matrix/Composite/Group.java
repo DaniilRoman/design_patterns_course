@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 abstract public class Group implements IMatrix {
     protected List<IMatrix> group;
-    protected IDrawer drawer;
+    private IDrawer drawer;
     protected Integer currentMax = 0, currentIndex = 0, currentOffset = 0;
     protected Map<Integer, Integer> getaway, offsets;
 
@@ -19,6 +19,17 @@ abstract public class Group implements IMatrix {
         group = new ArrayList<>();
         getaway = new HashMap<Integer, Integer>();
         offsets = new HashMap<Integer, Integer>();
+    }
+
+    @Override
+    public void setDrawer(IDrawer drawer) {
+        this.drawer = drawer;
+        group.forEach(matrix -> matrix.setDrawer(drawer));
+    }
+
+    @Override
+    public void drawBorder(int height, int width) {
+        drawer.drawBorder(height, width);
     }
 
     protected void addMatrix(IMatrix matrix, int border) {
@@ -49,5 +60,10 @@ abstract public class Group implements IMatrix {
             }
         }
         return max;
+    }
+
+    protected void drawItem(int yCord, int xCord, Integer value, int direction) {
+        int matrixIndex = getaway.get(direction);
+        group.get(matrixIndex).drawItem(yCord, xCord, value);
     }
 }

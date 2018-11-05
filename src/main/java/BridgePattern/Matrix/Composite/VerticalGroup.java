@@ -1,6 +1,5 @@
 package BridgePattern.Matrix.Composite;
 
-import BridgePattern.Drawer.IDrawer;
 import BridgePattern.Matrix.IMatrix;
 
 
@@ -42,24 +41,7 @@ public class VerticalGroup extends Group {
     }
 
     @Override
-    public IMatrix getComponent() {
-        return this;
-    }
-
-    @Override
     public void drawItem(int yCord, int xCord, Integer value) {
-        int matrixIndex = getaway.get(yCord);
-        group.get(matrixIndex).drawItem(yCord, xCord, value);
-    }
-
-    @Override
-    public void setDrawer(IDrawer drawer) {
-        this.drawer = drawer;
-        group.forEach(matrix -> matrix.setDrawer(drawer));
-    }
-
-    @Override
-    public void drawBorder(int height, int width) {
-        drawer.drawBorder(height, width);
+        drawItem(yCord, xCord, value, yCord);
     }
 }
