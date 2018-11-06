@@ -9,6 +9,7 @@ public class HorizontalGroup extends Group{
         super();
     }
 
+    @Override
     public void addMatrix(IMatrix matrix) {
         super.addMatrix(matrix, matrix.getCols());
     }

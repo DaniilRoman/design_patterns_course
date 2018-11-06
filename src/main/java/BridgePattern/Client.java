@@ -1,6 +1,9 @@
 package BridgePattern;
 
 import BridgePattern.Drawer.IDrawer;
+import BridgePattern.Matrix.Composite.Group;
+import BridgePattern.Matrix.Composite.HorizontalGroup;
+import BridgePattern.Matrix.Composite.VerticalGroup;
 import BridgePattern.Matrix.Decorator.Renumber;
 import BridgePattern.Matrix.IMatrix;
 import BridgePattern.Matrix.MatrixImpl.MatrixN;
@@ -23,10 +26,13 @@ public class Client extends JFrame {
     private JLabel heightLabel = new JLabel("height:");
     private JLabel widthLabal = new JLabel("width: ");
     private JCheckBox check = new JCheckBox("Available border", false);
+    private JButton horizontalGroupButton = new JButton("horizontal");
+    private JButton verticalGroupButton = new JButton("vertical");
     private JButton renumberButton = new JButton("renumber");
     private JButton revertButton = new JButton("revert");
     private List<IDrawer> drawers;
     private IMatrix matrix;
+    private Group group;
 
     public Client(List<IDrawer> drawers) {
         super("Simple Example");
@@ -38,30 +44,47 @@ public class Client extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(4,2,2,2));
+        container.setLayout(new GridLayout(5,2,2,2));
         heightInput.setSize(20, 20);
         widthInput.setSize(20, 20);
         sparseButton.addActionListener(new SparseButtonEventListener());
         normalButton.addActionListener(new NormalButtonEventListener());
+        horizontalGroupButton.addActionListener(new HorizontalGroupButtonEventListener());
+        verticalGroupButton.addActionListener(new VerticalGroupButtonEventListener());
         renumberButton.addActionListener(new RenumberButtonEventListener());
         revertButton.addActionListener(new RevertButtonEventListener());
         addInContainer(container, Arrays.asList(heightLabel, heightInput, widthLabal,
-                widthInput, normalButton, sparseButton, renumberButton, revertButton));
-
+                widthInput, normalButton, sparseButton, horizontalGroupButton,
+                verticalGroupButton, renumberButton, revertButton));
         setVisible(true);
+        Arrays.asList(normalButton, sparseButton, revertButton, renumberButton).forEach(button -> { button.setEnabled(false); });
+    }
+
+    class HorizontalGroupButtonEventListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            onNewGroup(new HorizontalGroup());
+        }
+    }
+
+    class VerticalGroupButtonEventListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            onNewGroup(new VerticalGroup());
+        }
     }
 
     class NormalButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            matrix = new MatrixN(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText()));
+            group.addMatrix(new MatrixN(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText())));
             generateAndDraw(matrix);
+            Arrays.asList(revertButton, renumberButton).forEach(button -> { button.setEnabled(true); });
         }
     }
 
     class SparseButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            matrix = new MatrixS(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText()));
+            group.addMatrix(new MatrixS(Integer.valueOf(heightInput.getText()), Integer.valueOf(widthInput.getText())));
             generateAndDraw(matrix);
+            Arrays.asList(revertButton, renumberButton).forEach(button -> { button.setEnabled(true); });
         }
     }
 
@@ -99,4 +122,10 @@ public class Client extends JFrame {
         components.forEach(container::add);
     }
 
+    private void onNewGroup(Group groupType) {
+        if(group != null) { groupType.addMatrix(group); }
+        group = groupType;
+        matrix = group;
+        Arrays.asList(normalButton, sparseButton).forEach(button -> { button.setEnabled(true); });
+    }
 }

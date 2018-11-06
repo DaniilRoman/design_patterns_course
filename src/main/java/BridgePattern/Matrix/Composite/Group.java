@@ -21,6 +21,8 @@ abstract public class Group implements IMatrix {
         offsets = new HashMap<Integer, Integer>();
     }
 
+    abstract public void addMatrix(IMatrix matrix);
+
     @Override
     public void setDrawer(IDrawer drawer) {
         this.drawer = drawer;
