@@ -27,8 +27,10 @@ public class HorizontalGroup extends Group{
     @Override
     public void set(int row, int col, Integer value) {
         int matrixIndex = getaway.get(col);
-        int trueCol = col - offsets.get(matrixIndex);
-        group.get(matrixIndex).set(row, trueCol, value);
+        if(row<group.get(matrixIndex).getRows()) {
+            int trueCol = col - offsets.get(matrixIndex);
+            group.get(matrixIndex).set(row, trueCol, value);
+        }
     }
 
     @Override
