@@ -1,15 +1,16 @@
 package BridgePattern.Util;
 
+import BridgePattern.Matrix.IMatrix;
 import BridgePattern.Matrix.Matrix;
 
 import java.util.function.Function;
 
 public class Statistic {
 
-    private Matrix matrix;
+    private IMatrix matrix;
     private int rowsCount, colsCount;
 
-    public Statistic(Matrix matrix) {
+    public Statistic(IMatrix matrix) {
         this.matrix = matrix;
         rowsCount = matrix.getRows();
         colsCount = matrix.getCols();

@@ -28,8 +28,10 @@ public class VerticalGroup extends Group {
     @Override
     public void set(int row, int col, Integer value) {
         int matrixIndex = getaway.get(row);
-        int trueRow = row - offsets.get(matrixIndex);
-        group.get(matrixIndex).set(trueRow, col, value);
+        if(col<group.get(matrixIndex).getCols()) {
+            int trueRow = row - offsets.get(matrixIndex);
+            group.get(matrixIndex).set(trueRow, col, value);
+        }
     }
 
     @Override
