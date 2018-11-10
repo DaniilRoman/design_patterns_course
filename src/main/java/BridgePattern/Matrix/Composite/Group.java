@@ -2,6 +2,8 @@ package BridgePattern.Matrix.Composite;
 
 import BridgePattern.Drawer.IDrawer;
 import BridgePattern.Matrix.IMatrix;
+import BridgePattern.Matrix.IMatrixEx;
+import BridgePattern.Matrix.Iterator.AbstractIterator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-abstract public class Group implements IMatrix {
-    protected List<IMatrix> group;
+abstract public class Group implements IMatrixEx {
+    protected List<IMatrixEx> group;
     private IDrawer drawer;
     protected Integer currentMax = 0, currentIndex = 0, currentOffset = 0;
     protected Map<Integer, Integer> getaway, offsets;
@@ -21,7 +23,7 @@ abstract public class Group implements IMatrix {
         offsets = new HashMap<Integer, Integer>();
     }
 
-    abstract public void addMatrix(IMatrix matrix);
+    abstract public void addMatrix(IMatrixEx matrix);
 
     @Override
     public void setDrawer(IDrawer drawer) {
@@ -34,7 +36,7 @@ abstract public class Group implements IMatrix {
         drawer.drawBorder(height, width);
     }
 
-    protected void addMatrix(IMatrix matrix, int border) {
+    protected void addMatrix(IMatrixEx matrix, int border) {
         group.add(matrix);
         for (int i=0; i<border; i++) {
             getaway.put(currentMax++, currentIndex);

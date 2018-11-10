@@ -3,11 +3,14 @@ package BridgePattern.Matrix.Decorator;
 import BridgePattern.Drawer.IDrawer;
 import BridgePattern.Matrix.IDrawble;
 import BridgePattern.Matrix.IMatrix;
+import BridgePattern.Matrix.IMatrixEx;
 
 
-public abstract class MatrixDecorator implements IMatrix, IDrawble{
+public abstract class MatrixDecorator implements IMatrixEx, IDrawble{
 
     protected IMatrix matrix;
+
+    protected IDrawer drawer;
 
     public MatrixDecorator(IMatrix matrix) {
         this.matrix = matrix;
@@ -35,12 +38,12 @@ public abstract class MatrixDecorator implements IMatrix, IDrawble{
 
     @Override
     public void drawItem(int yCord, int xCord, Integer value) {
-        matrix.drawItem(yCord, xCord, value);
+        drawer.drawItem(yCord, xCord, value);
     }
 
     @Override
     public void drawBorder(int height, int width) {
-        matrix.drawBorder(height, width);
+        drawer.drawBorder(height, width);
     }
 
 }

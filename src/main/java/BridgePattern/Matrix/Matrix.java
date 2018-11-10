@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract public class Matrix implements IMatrix {
+abstract public class Matrix implements IMatrixEx {
 
     protected IDrawer drawer;
 

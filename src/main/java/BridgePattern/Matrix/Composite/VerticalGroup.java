@@ -1,6 +1,7 @@
 package BridgePattern.Matrix.Composite;
 
 import BridgePattern.Matrix.IMatrix;
+import BridgePattern.Matrix.IMatrixEx;
 
 
 public class VerticalGroup extends Group {
@@ -10,7 +11,7 @@ public class VerticalGroup extends Group {
     }
 
     @Override
-    public void addMatrix(IMatrix matrix) {
+    public void addMatrix(IMatrixEx matrix) {
         super.addMatrix(matrix, matrix.getRows());
     }
 
