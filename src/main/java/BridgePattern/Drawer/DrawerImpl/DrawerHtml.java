@@ -33,7 +33,6 @@ public class DrawerHtml implements IDrawer {
     @Override
     public void drawItem(int yCord, int xCord, Integer value) {
         this.matrix[yCord][xCord] = Optional.ofNullable(value).orElse(0).toString();
-//        Runtime.getRuntime().exec("clear");
 
         System.out.println(html);
         for (int i = 0; i < height; i++) {
@@ -47,6 +46,6 @@ public class DrawerHtml implements IDrawer {
         }
 
         System.out.println("</body>\n</html>");
-        System.out.println();//удалить
+        System.out.println();
     }
 }

@@ -30,7 +30,6 @@ public class DrawerConsole implements IDrawer {
     @Override
     public void drawItem(int yCord, int xCord, Integer value) {
         this.matrix[yCord][xCord] = Optional.ofNullable(value).orElse(0).toString();
-//        Runtime.getRuntime().exec("clear");
         String tmpValue;
         for (int i = 0; i < height; i++) {
             System.out.print("[ ");

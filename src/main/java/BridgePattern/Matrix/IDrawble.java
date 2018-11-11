@@ -4,6 +4,6 @@ import BridgePattern.Drawer.IDrawer;
 
 
 public interface IDrawble {
-    void draw();
+    void draw(boolean isBorder);
     void setDrawer(IDrawer drawer);
 }

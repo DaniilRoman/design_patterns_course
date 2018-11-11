@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract public class Matrix implements IMatrixEx {
-
+abstract public class Matrix implements IMatrix {
     protected IDrawer drawer;
 
     private List<IVector> matrix;
@@ -45,11 +44,6 @@ abstract public class Matrix implements IMatrixEx {
         List<Integer> sizesOfRows = new ArrayList<>(0);
         matrix.forEach(vector -> sizesOfRows.add(vector.getSize()));
         return Collections.max(sizesOfRows);
-    }
-
-    @Override
-    public void drawBorder(int height, int width) {
-        drawer.drawBorder(height, width);
     }
 
     protected abstract IVector createVector(int col);

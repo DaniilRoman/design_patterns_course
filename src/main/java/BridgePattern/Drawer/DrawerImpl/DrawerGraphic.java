@@ -16,7 +16,7 @@ public class DrawerGraphic extends JFrame implements IDrawer {
 
     public DrawerGraphic() {
         super("Matrix");
-        setSize(500, 500);
+        setSize(700, 700);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -45,8 +45,6 @@ public class DrawerGraphic extends JFrame implements IDrawer {
     @Override
     public void drawItem(int yCord, int xCord, Integer value) {
         buttons[yCord][xCord].setText(Optional.ofNullable(value).orElse(0).toString());
-//        panel.updateUI();
-//        setVisible(true);
     }
 
 }

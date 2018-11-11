@@ -28,10 +28,10 @@ public class Main {
 //        }
 
         normalM.setDrawer(new DrawerConsole());
-        normalM.draw();
+        normalM.draw(true);
         Thread.sleep(1000);
         normalM.setDrawer(new DrawerGraphic());
-        normalM.draw();
+        normalM.draw(true);
     }
 
     private static void print(Statistic statistic) {

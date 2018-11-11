@@ -12,9 +12,17 @@ public class MatrixS extends Matrix {
     }
 
     @Override
-    public void drawItem(int yCord, int xCord, Integer value) {
-        if(value != null) {
-            drawer.drawItem(yCord, xCord, value);
+    public void draw(boolean isBorder) {
+        if(isBorder) {
+            drawer.drawBorder(getRows(), getCols());
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getCols(); j++) {
+                Integer value = get(i, j);
+                if(value != null) {
+                    drawer.drawItem(i, j, value);
+                }
+            }
         }
     }
 

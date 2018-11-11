@@ -12,8 +12,8 @@ import BridgePattern.Util.ValuesGen;
 
 public class test {
     public static void main(String[] args) {
-        Matrix normalM = new MatrixN(8, 5);
-        Matrix sparseM = new MatrixS(5,7);
+        IMatrix normalM = new MatrixN(8, 5);
+        IMatrix sparseM = new MatrixS(5,7);
 
         ValuesGen.generate(normalM, 10, 80);
         ValuesGen.generate(sparseM, 15, 20);
@@ -22,6 +22,6 @@ public class test {
         matrix.addMatrix(sparseM);
         IDrawer drawer = new DrawerConsole();
         matrix.setDrawer(drawer);
-        matrix.draw();
+        matrix.draw(true);
     }
 }

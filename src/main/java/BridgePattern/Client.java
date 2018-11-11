@@ -107,14 +107,14 @@ public class Client extends JFrame {
     }
 
     private void generateAndDraw(IMatrix matrix){
-        generate(matrix, 10, 80);
+        generate(matrix, 25, 80);
         draw(matrix);
     }
 
     private void draw(IMatrix matrix) {
         drawers.forEach(drawer -> {
             matrix.setDrawer(drawer);
-            matrix.draw();
+            matrix.draw(true);
         });
     }
 

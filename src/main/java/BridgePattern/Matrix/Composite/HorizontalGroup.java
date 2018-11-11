@@ -1,17 +1,16 @@
 package BridgePattern.Matrix.Composite;
 
 import BridgePattern.Matrix.IMatrix;
-import BridgePattern.Matrix.IMatrixEx;
 
 
-public class HorizontalGroup extends Group{
+public class HorizontalGroup extends Group {
 
     public HorizontalGroup() {
         super();
     }
 
     @Override
-    public void addMatrix(IMatrixEx matrix) {
+    public void addMatrix(IMatrix matrix) {
         super.addMatrix(matrix, matrix.getCols());
     }
 
@@ -46,6 +45,6 @@ public class HorizontalGroup extends Group{
 
     @Override
     public void drawItem(int yCord, int xCord, Integer value) {
-        drawItem(yCord, xCord, value, xCord);
+        drawer.drawItem(yCord, xCord + offsetForDraw, value);
     }
 }
