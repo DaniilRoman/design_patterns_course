@@ -107,7 +107,7 @@ public class Client extends JFrame {
     }
 
     private void generateAndDraw(IMatrix matrix){
-        generate(matrix, 25, 80);
+        generate(matrix, 10, 80);
         draw(matrix);
     }
 

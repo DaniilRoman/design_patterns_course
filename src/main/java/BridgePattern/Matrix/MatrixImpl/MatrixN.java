@@ -1,5 +1,6 @@
 package BridgePattern.Matrix.MatrixImpl;
 
+import BridgePattern.Matrix.Iterator.DrawItemFunc;
 import BridgePattern.Matrix.Matrix;
 import BridgePattern.Vector.IVector;
 import BridgePattern.Vector.VectorImpl.VectorN;
@@ -11,13 +12,10 @@ public class MatrixN extends Matrix {
     }
 
     @Override
-    public void draw(boolean isBorder) {
-        if(isBorder) {
-            drawer.drawBorder(getRows(), getCols());
-        }
+    public void iterate(DrawItemFunc func) {
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getCols(); j++) {
-                drawer.drawItem(i, j, get(i, j));
+                func.apply(i, j, get(i, j));
             }
         }
     }
@@ -26,4 +24,5 @@ public class MatrixN extends Matrix {
     protected IVector createVector(int col) {
         return new VectorN(col);
     }
+
 }

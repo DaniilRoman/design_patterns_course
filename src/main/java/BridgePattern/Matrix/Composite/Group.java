@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-abstract public class Group implements IMatrixEx {
+abstract public class Group implements IMatrix {
     protected List<IMatrix> group;
     protected IDrawer drawer;
     protected Integer currentMax = 0, currentIndex = 0, currentOffset = 0, offsetForDraw = 0;
@@ -27,12 +27,7 @@ abstract public class Group implements IMatrixEx {
     @Override
     public void setDrawer(IDrawer drawer) {
         this.drawer = drawer;
-        group.forEach(matrix -> matrix.setDrawer(this));
-    }
-
-    @Override
-    public void drawBorder(int height, int width) {
-        drawer.drawBorder(height, width);
+        group.forEach(matrix -> matrix.setDrawer(drawer));
     }
 
     protected void addMatrix(IMatrix matrix, int border) {
@@ -65,14 +60,5 @@ abstract public class Group implements IMatrixEx {
         return max;
     }
 
-    @Override
-    public void draw(boolean isBorder) {
-        if(isBorder) {
-            drawBorder(getRows(), getCols());
-        }
-        for (Integer i: offsets.keySet()) {
-            offsetForDraw = offsets.get(i);
-            group.get(i).draw(false);
-        }
-    }
+
 }

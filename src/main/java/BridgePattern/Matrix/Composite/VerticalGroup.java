@@ -1,6 +1,7 @@
 package BridgePattern.Matrix.Composite;
 
 import BridgePattern.Matrix.IMatrix;
+import BridgePattern.Matrix.Iterator.DrawItemFunc;
 
 
 public class VerticalGroup extends Group {
@@ -44,7 +45,27 @@ public class VerticalGroup extends Group {
     }
 
     @Override
-    public void drawItem(int yCord, int xCord, Integer value) {
-        drawer.drawItem(yCord + offsetForDraw, xCord, value);
+    public void draw(boolean isBorder) {
+        if(isBorder) {
+            drawer.drawBorder(getRows(), getCols());
+        }
+
+        for (Integer i: offsets.keySet()) {
+            offsetForDraw = offsets.get(i);
+            group.get(i).iterate((int yCord, int xCord, Integer value) -> {
+                drawer.drawItem(yCord + offsetForDraw, xCord, value);
+            });
+        }
+
+    }
+
+    @Override
+    public void iterate(DrawItemFunc func) {
+        for (Integer i: offsets.keySet()) {
+            offsetForDraw = offsets.get(i);
+            group.get(i).iterate((int yCord, int xCord, Integer value) -> {
+                func.apply(yCord + offsetForDraw, xCord, value);
+            });
+        }
     }
 }

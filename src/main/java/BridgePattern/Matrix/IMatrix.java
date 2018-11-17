@@ -1,6 +1,8 @@
 package BridgePattern.Matrix;
 
-public interface IMatrix extends IDrawble{
+import BridgePattern.Matrix.Iterator.IIterator;
+
+public interface IMatrix extends IDrawble, IIterator {
 
     Integer get(int row, int col);
 

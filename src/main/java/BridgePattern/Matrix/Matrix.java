@@ -1,6 +1,8 @@
 package BridgePattern.Matrix;
 
 import BridgePattern.Drawer.IDrawer;
+import BridgePattern.Matrix.Iterator.DrawItemFunc;
+import BridgePattern.Matrix.Iterator.IIterator;
 import BridgePattern.Vector.IVector;
 
 import java.util.ArrayList;
@@ -44,6 +46,14 @@ abstract public class Matrix implements IMatrix {
         List<Integer> sizesOfRows = new ArrayList<>(0);
         matrix.forEach(vector -> sizesOfRows.add(vector.getSize()));
         return Collections.max(sizesOfRows);
+    }
+
+    @Override
+    public void draw(boolean isBorder) {
+        if(isBorder) {
+            drawer.drawBorder(getRows(), getCols());
+        }
+        iterate((int i, int j, Integer value) -> {drawer.drawItem(i, j, value);});
     }
 
     protected abstract IVector createVector(int col);
