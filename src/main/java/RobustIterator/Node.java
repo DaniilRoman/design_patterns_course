@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Node {
     private Integer value;
+    private int size=0;
     private List<Node> children;
 
     public Node() {
@@ -16,10 +17,12 @@ public class Node {
 
     public void add(Node node) {
         children.add(node);
+        size++;
     }
 
-    public void add(List<Node> node) {
-        children.addAll(node);
+    public void add(List<Node> nodes) {
+        children.addAll(nodes);
+        size+=nodes.size();
     }
 
     public void printOne() {
@@ -59,5 +62,21 @@ public class Node {
         }
         System.out.print("[ " + value + " ]");
         children.forEach(Node::print);
+    }
+
+    public Iterator getIterator() {
+        return new Iterator();
+    }
+
+    private class Iterator {
+        int cursor;
+
+        public boolean hasNext() {
+            return children.stream().allMatch(node -> {node.getIterator().hasNext();});
+        }
+
+        public Node next() {
+
+        }
     }
 }

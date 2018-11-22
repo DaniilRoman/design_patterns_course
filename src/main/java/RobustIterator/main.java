@@ -18,9 +18,12 @@ public class main {
         System.out.println();
         System.out.println(nodes);
 
-        for (Iterator<Node> iter = nodes.listIterator(); iter.hasNext(); ) {
+        int i = 0;
+
+        for (Iterator<Node> iter = nodes.iterator(); iter.hasNext(); ) {
+            i++;
             Node a = iter.next();
-            iter.remove();
+            if(i==3) {iter.remove();}
         }
 
         System.out.println(nodes);
