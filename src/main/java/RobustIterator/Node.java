@@ -6,8 +6,9 @@ import java.util.Random;
 
 public class Node {
     private Integer value;
-    private int size=0;
+    private int size = 0;
     private List<Node> children;
+    private Iterator iterator;
 
     public Node() {
         children = new ArrayList<>();
@@ -22,7 +23,7 @@ public class Node {
 
     public void add(List<Node> nodes) {
         children.addAll(nodes);
-        size+=nodes.size();
+        size += nodes.size();
     }
 
     public void printOne() {
@@ -35,17 +36,16 @@ public class Node {
 
     public void print() {
         printOne();
-        if(children.size()>0) {
-            System.out.print("  ");
-            children.get(0).printOne();
-        }
-        children.stream().skip(1).forEach(Node::print);
+        if (children.size() == 0) return;
+        System.out.print(" |");
+        children.forEach(Node::print);
+        System.out.print("|| ");
     }
 
     public void print(String offset) {
         System.out.print("  ");
         printOne();
-        if(children.size()>0) {
+        if (children.size() > 0) {
             System.out.print("  ");
             children.get(0).printOne();
         }
@@ -57,7 +57,7 @@ public class Node {
     }
 
     public void print(boolean flag) {
-        if(flag) {
+        if (flag) {
             System.out.println();
         }
         System.out.print("[ " + value + " ]");
@@ -65,18 +65,41 @@ public class Node {
     }
 
     public Iterator getIterator() {
-        return new Iterator();
+        return iterator == null ?
+                iterator = new Iterator() : iterator;
     }
 
-    private class Iterator {
-        int cursor;
+    public class Iterator {
+        int cursor = -1;
 
         public boolean hasNext() {
-            return children.stream().allMatch(node -> {node.getIterator().hasNext();});
+
+            if (cursor == 0 && children.size() == 0) return false;
+
+            return cursor < size;
+
+//            return children.stream().allMatch(node -> { return node.getIterator().hasNext();});
         }
 
         public Node next() {
+            if (cursor == -1) {
+                cursor++;
+                return Node.this;
+            }
+            if (cursor > size) return null;
 
+            Node nextNode = null;
+
+            if (children.get(cursor).getIterator().hasNext()) {
+                nextNode = children.get(cursor).getIterator().next();
+            }
+            if (nextNode == null) {
+                if (hasNext()) {
+                    return children.get(cursor++).getIterator().next();
+                }
+            } else return nextNode;
+            return null;
         }
+
     }
 }

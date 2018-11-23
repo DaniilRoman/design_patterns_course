@@ -15,17 +15,21 @@ public class main {
 
         tree.print();
 
-        System.out.println();
-        System.out.println(nodes);
-
-        int i = 0;
-
-        for (Iterator<Node> iter = nodes.iterator(); iter.hasNext(); ) {
-            i++;
-            Node a = iter.next();
-            if(i==3) {iter.remove();}
+        for (int i = 0; i < 15; i++) {
+            System.out.println(tree.getIterator().next());
         }
 
-        System.out.println(nodes);
+//        System.out.println();
+//        System.out.println(nodes);
+//
+//        int i = 0;
+//
+//        for (Iterator<Node> iter = nodes.iterator(); iter.hasNext(); ) {
+//            i++;
+//            Node a = iter.next();
+//            if(i==3) {iter.remove();}
+//        }
+//
+//        System.out.println(nodes);
     }
 }
