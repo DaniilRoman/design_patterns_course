@@ -78,7 +78,6 @@ public class Node {
 
             return cursor < size;
 
-//            return children.stream().allMatch(node -> { return node.getIterator().hasNext();});
         }
 
         public Node next() {
@@ -86,20 +85,15 @@ public class Node {
                 cursor++;
                 return Node.this;
             }
-            if (cursor > size) return null;
 
-            Node nextNode = null;
-
-            if (children.get(cursor).getIterator().hasNext()) {
-                nextNode = children.get(cursor).getIterator().next();
-            }
-            if (nextNode == null) {
-                if (hasNext()) {
-                    return children.get(cursor++).getIterator().next();
+            if(hasNext()) {
+                if (children.get(cursor).getIterator().hasNext()) {
+                    return children.get(cursor).getIterator().next();
                 }
-            } else return nextNode;
+                cursor++;
+                return next();
+            }
             return null;
         }
-
     }
 }

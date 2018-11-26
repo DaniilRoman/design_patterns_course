@@ -15,7 +15,9 @@ public class main {
 
         tree.print();
 
-        for (int i = 0; i < 15; i++) {
+        System.out.println();
+//        for (int i = 0; i < 25; i++) {
+        while (tree.getIterator().hasNext()) {
             System.out.println(tree.getIterator().next());
         }
 
