@@ -1,30 +1,28 @@
-package RobustIterator;
-
-import com.sun.org.apache.xpath.internal.SourceTree;
+package RobustIterator.test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public class Node {
+public class Element {
     private Integer value;
-    private int size = 0;
-    private List<Node> children;
+    public int size = 0;
+    private List<Element> children;
     private Iterator iterator;
 
-    public Node() {
+    public Element() {
         children = new ArrayList<>();
         Random random = new Random();
         value = random.nextInt(55);
     }
 
-    public void add(Node node) {
+    public void add(Element node) {
         children.add(node);
         size++;
     }
 
-    public void add(List<Node> nodes) {
+    public void add(List<Element> nodes) {
         children.addAll(nodes);
         size += nodes.size();
     }
@@ -41,7 +39,7 @@ public class Node {
         printOne();
         if (children.size() == 0) return;
         System.out.print(" |");
-        children.forEach(Node::print);
+        children.forEach(Element::print);
         System.out.print("|| ");
     }
 
@@ -64,7 +62,7 @@ public class Node {
             System.out.println();
         }
         System.out.print("[ " + value + " ]");
-        children.forEach(Node::print);
+        children.forEach(Element::print);
     }
 
     public Iterator getIterator() {
@@ -82,59 +80,20 @@ public class Node {
         }
 
         public boolean hasNext() {
-
-//            if (cursor == 0 && children.size() == 0) return false;
-
-//            System.out.println(cursor);
-//            System.out.println(size);
-//            System.out.println(stack);
-            return cursor < size && !stack.empty();
-
+            return cursor < size;
         }
 
-        public Node next() {
-
-//            Iterator current;
-            if(!stack.empty()) {
-//                current = stack.peek();
-                if (cursor < size) {
-
-                    if (cursor == -1) {
-                        cursor++;
-                        return Node.this;
-                    }
-
-                    if (children.get(cursor).getIterator().hasNext()) {
-                        stack.push(children.get(cursor).getIterator());
-//                        cursor++;
-                        return stack.peek().next();
-                    }
-
+        public Element next() {
+            if(hasNext()) {
+                if(cursor == -1) {
                     cursor++;
-                    return next();
-
-
-                } else {
-                    stack.pop();
-                    return next();
+                    return Element.this;
                 }
+                return children.get(cursor++);
             }
 
             return null;
-
-//            if (cursor == -1) {
-//                cursor++;
-//                return Node.this;
-//            }
-//
-//            if(hasNext()) {
-//                if (children.get(cursor).getIterator().hasNext()) {
-//                    return children.get(cursor).getIterator().next();
-//                }
-//                cursor++;
-//                return next();
-//            }
-//            return null;
         }
     }
 }
+
